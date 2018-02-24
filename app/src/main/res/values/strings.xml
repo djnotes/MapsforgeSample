@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Mapsforge Hello</string>
+    <string name="rationale_storage_access">The app requires storage access to work with offline maps</string>
+    <string name="ok" >OK</string>
+</resources>
