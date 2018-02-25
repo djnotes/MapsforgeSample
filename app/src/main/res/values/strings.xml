@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Mapsforge Hello</string>
-    <string name="rationale_storage_access">The app requires storage access to work with offline maps</string>
+    <string name="rationale_permissions">The app requires storage and location access to provide offline maps and navigation</string>
     <string name="ok" >OK</string>
+    <string name="location_permission_required">This app requires access to the device location to give map location updates</string>
+    <string name="location_permission_denied">Location access denied</string>
+    <string name="storage_access_required_offline">Permission required to access offline map</string>
 </resources>
