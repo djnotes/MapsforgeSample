@@ -189,12 +189,11 @@ public class MapsForgeActivity extends AppCompatActivity implements LocationList
         mMapView.setCenter(new LatLong(location.getLatitude(), location.getLongitude()));
         RingtoneManager ringMgr = new RingtoneManager(this);
 
-
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
+        Log.d(TAG, "onStatusChanged: ");
     }
 
     @Override
@@ -234,5 +233,11 @@ public class MapsForgeActivity extends AppCompatActivity implements LocationList
     protected void onResume() {
         super.onResume();
         enableAvailableProviders();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mLocationManager.removeUpdates(this);
     }
 }
