@@ -10,7 +10,10 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +23,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.Toast;
 
@@ -69,6 +73,7 @@ public class MapsForgeActivity extends AppCompatActivity implements LocationList
         this.mMapView.setClickable(true);
         this.mMapView.getMapScaleBar().setVisible(true);
         this.mMapView.setBuiltInZoomControls(true);
+        mMapView.setZoomLevel((byte) 15);
         this.mMapView.setZoomLevelMin((byte) 10);
         this.mMapView.setZoomLevelMax((byte) 20);
 
@@ -105,7 +110,7 @@ public class MapsForgeActivity extends AppCompatActivity implements LocationList
         this.mMapView.getLayerManager().getLayers().add(tileRendererLayer);
 
         this.mMapView.setCenter(new LatLong(35.6892, 51.3890));
-        this.mMapView.setZoomLevel((byte) 12);
+        this.mMapView.setZoomLevel((byte) 15);
         mMapView.invalidate();
 
     }
@@ -178,15 +183,13 @@ public class MapsForgeActivity extends AppCompatActivity implements LocationList
 
     @Override
     public void onLocationChanged(Location location) {
+        Toast.makeText(mContext, "Location changed: " + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onLocationChanged: "  + location.getLatitude() + ", " + location.getLongitude());
         mMyLocationOverlay.setPosition(location.getLatitude(), location.getLongitude(), location.getAccuracy());
         mMapView.setCenter(new LatLong(location.getLatitude(), location.getLongitude()));
-        MediaPlayer player = new MediaPlayer();
-        try {
-            player.setDataSource("asset://notify.wav");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        player.start();
+        RingtoneManager ringMgr = new RingtoneManager(this);
+
+
     }
 
     @Override
